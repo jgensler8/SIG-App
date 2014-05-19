@@ -1,0 +1,21 @@
+{
+  "name": "Talk-7",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jgensler8/SIG-App",
+  "description": "Sample Game",
+  "authors": [
+    "Jeff Gensler"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser-official": "~2.0.4"
+  }
+}

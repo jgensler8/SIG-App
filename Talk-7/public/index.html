@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>SIG-App's First Game</title>
+		<script type="text/javascript" src="bower/phaser-official/dist/phaser.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+    window.onload = function() {
+
+    		var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create , update: update});
+
+        //here is where the resources will be loaded
+      	function preload() {
+          game.load.image('background', 'images/background.png');
+          game.load.image('terrain', 'images/terrain.png');
+          game.load.image('coin', 'images/coin.png');
+          game.load.spritesheet('player', 'images/player.png', 32,48);
+      	}
+
+        //called once at the beginning of a
+        function create() {
+          //add the world
+          game.physics.startSystem(Phaser.Physics.ARCADE);
+          game.add.sprite(0,0,'background');
+            //platform group
+          platforms = game.add.group();
+          platforms.enableBody = true;
+
+            //bottom group
+          var ground = platforms.create(0, game.world.height - 64, 'terrain');
+          ground.scale.setTo(15,2);
+          ground.body.immovable = true;
+            //two ledges
+          ledge = platforms.create( 200, 250,'terrain');
+          ledge.body.immovable = false;
+          ledge = platforms.create( 400, 250,'terrain');
+          ledge.body.immovable = true;
+
+          //add the player
+          player = game.add.sprite(10,10, 'player');
+          game.physics.arcade.enable(player);
+            //physics control
+          player.body.bounce.y = 0.2;
+          player.body.gravity.y = 300;
+          player.body.collideWorldBounds = true;
+            //sprite control
+          player.animations.add('left', [0,1,2,3], 10, true);
+          player.animations.add('right', [5,6,7,8], 10,  true);
+        }
+
+        //called every tick
+        function update(){
+          //collision code
+          game.physics.arcade.collide(player,platforms);
+
+          //gather the keyboard input
+          cursors = game.input.keyboard.createCursorKeys();
+
+          //  Reset the players velocity (movement)
+          player.body.velocity.x = 10;
+       
+          if (cursors.left.isDown)
+          {
+              //  Move to the left
+              player.body.velocity.x *= -(player.body.velocity.x+20);
+       
+              player.animations.play('left');
+          }
+          else if (cursors.right.isDown)
+          {
+              //  Move to the right
+              player.body.velocity.x *= (player.body.velocity.x+20);
+       
+              player.animations.play('right');
+          }
+          else
+          {
+              //  Stand still
+              player.animations.stop();
+       
+              player.frame = 4;
+          }
+          
+          //  Allow the player to jump if they are touching the ground.
+          if (cursors.up.isDown)
+          {
+              player.body.velocity.y = -350;
+          }
+        }
+    };
+		</script>
+	</body>
+</html>
