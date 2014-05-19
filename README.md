@@ -1,4 +1,4 @@
-SIG-Code
+SIG-App @ UIC
 ========
 
-SIG-Code mini-projects and tutorials.
+See the Wiki for notes. Link is [here](https://github.com/jgensler8/SIG-App/wiki)
