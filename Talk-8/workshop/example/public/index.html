@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Publish/Subscibe Example</title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+		<script type="text/javascript" src="bower/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://localhost:8000/faye/client.js"></script>
+		<link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12" style="heigh:50%;">
+					<ul id="messageList">
+
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8 col-md-8 col-lg-8">
+					<input type="text" id="messageBox">
+				</div>
+				<div class="col-sm-4 col-md-4 col-lg-4">
+					<button class="button" id="send">Send</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		var client = new Faye.Client('http://localhost:8000/faye');
+		//subscribe
+		client.subscribe('/chatroom', function(message){
+			$('#messageList').append('<li>'+message.text+'</li>');
+		});
+		//publish
+		$('#send').on('click', function(){
+			client.publish('/chatroom', {
+				text: $('#messageBox').value
+			})
+		});
+		</script>
+	</body>
+</html>
