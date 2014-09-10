@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+	<!-- create the button and textbox here -->
+	<input type="radio" name="list" value="list1">add to list 1<br>
+	<input type="radio" name="list" value="list2">add to list 2<br>
+	
+	<button type="button" onclick="add()">Add</button>
+	<input type="text" id="input"></input>
+
+	<!-- lists -->
+	<div>List 1:</div>
+	<ul id="list1"></ul>
+	<div>List 2:</div>
+	<ul id="list2"></ul>
+	
+	<script>
+	/*
+	 write some code to:
+		1. grab the value out of the text box
+		2. append the value to the  list
+	*/
+
+	var add = function(){
+		//extract
+		var value = document.getElementById('input').value;
+
+		//create the new node
+		var listitem = document.createElement('li');
+		listitem.innerHTML = value;
+
+		var radiobuttons = document.getElementsByName('list');
+		for( var i = 0; i < radiobuttons.length; i++)
+		{
+			if(radiobuttons[i].checked)
+			{
+				//apend the node
+				if(radiobuttons[i].value === "list1")
+					document.getElementById('list1').appendChild(listitem);
+				else if(radiobuttons[i].value === "list2")
+					document.getElementById('list2').appendChild(listitem);
+			}
+		}
+	};	
+	</script>
+</body>
+</html>

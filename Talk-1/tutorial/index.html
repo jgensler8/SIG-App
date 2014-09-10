@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- pull the script from of the Content Delivery Network -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- some things to interact with -->
+	<form>
+		<input type="text" id="textbox">
+		<!-- Check this link out to learn about input types. notice html5 features -->
+		<!-- http://www.w3schools.com/tags/tag_input.asp -->
+		<br> <!-- new line -->
+		<button onclick="buttonclick()">click me</button>
+	</form>
+	
+	<ul id="documentList"> </ul
+	<ul id="jqueryList"></ul>
+
+	<script>
+	var buttonclick = function(){
+		var listItem = document.createElement('li');		
+		listItem.innerHTML = "(document) clicked";
+		document.getElementById("documentList").appendChild(listItem);
+	};
+	</script>
+
+
+<script>
+	// variables
+	global = 5;
+	var local = "string";
+	console.log("local:", local);
+	local = 13
+	console.log("local:", local);
+
+	//object
+	var object = 
+	{
+		key: "value",
+		nested: {
+				sig: "app",
+				leet: 1337
+			}
+	};
+
+	console.log("object.key:", object.key);
+	
+	// arrays
+	var array = [];
+	array.push(object, object, object);
+	
+	//looping
+	console.log("regular for loop");
+	for(var x = 0; x < array.length; x++)
+	{
+		console.log("Index:", x , ", value:", array[x]);
+	}
+
+	console.log("foreach loop");
+	array.forEach(function(x)
+	{
+		console.log("Index:", x , ", value:", array[x]);
+
+	});
+
+	// ajax
+	var failure = function(err){
+		console.log(err);
+	};
+
+	
+	//someone fix this callback hell!!!
+	function doOneThing(cb = function( stuff, etc)
+		{
+			console.log(stuff,etc)
+		})
+	{
+		cb("param1", "param2");
+	};
+
+	//hopefully to 
+	var anotherThing = function(param1, param2){
+		console.log(param1, param2);
+	};
+
+	var doOneThing = function(callback){
+		var x = 2;
+		x++;
+		callback("x", x);
+	};
+
+	doOneThing(anotherThing);
+
+	//or
+
+	(	function(){
+			var doOneThingNested = function(callback){
+				var x = 2;
+				x++;
+				callback("x", x);
+			};
+
+			var anotherThingNested = function(param1, param2){
+				console.log(param1, param2);
+			};
+			
+			doOneThing(anotherThing);
+		}
+	)();
+
+	// AJAX
+	/*
+	$.ajax(
+	{
+		url: 'jgensl2.people.uic.edu/sig-app/index.html',
+
+		// GET, POST, PUT, DELETE
+		type: 'GET',
+	
+		success: function(data, textStatus, jqXHR){
+			console.log(data);
+		},
+		failure: failure
+	});
+	*/
+</script>
+</body>
+</html>
