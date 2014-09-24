@@ -1,0 +1,6 @@
+We use:
+npm init [package name]
+to create a package.json to describe the current module we will be working on
+
+npm install [--save|--save-dev] [package name]
+to save a module to the current package.json and install it in the node_modules/ directory.
