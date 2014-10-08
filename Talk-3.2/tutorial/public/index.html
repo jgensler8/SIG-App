@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+</head>
+<body>
+  <div ng-app="app">
+    <div ng-view></div>
+  </div>
+  <script>
+    var app = angular.module('app', ['ngRoute']);
+    
+    //controllers
+    app.controller('BasicCtrl',
+      [
+        '$scope',
+        '$location',
+        function($scope, $location)
+        {
+          $scope.Name = "Unknown";
+          
+          $scope.goToLoginPage = function(){
+            $location.path('#/login');
+          };
+        }
+      ]
+    );
+    
+    app.controller('LoginCtrl',
+      [
+        '$scope',
+        function($scope)
+        {
+          $scope.Name = "UNKNOWN";
+          
+          $scope.logMeIn = function()
+          {
+            $scope.Name = "Jeff Gensler";
+          };
+        }
+      ]
+    );
+    
+    //router
+    app.config(
+      [ '$routeProvider',
+      function($routeProvider)
+      {
+        $routeProvider
+        .when(
+          '/',
+          {
+            templateUrl: 'partials/index.html',
+            controller: 'BasicCtrl'
+          }
+          )
+        .when(
+          '/login',
+          {
+            templateUrl: 'partials/login.html',
+            controller: 'LoginCtrl'
+          });
+          /*
+        .otherwise(
+          {
+            redirectTo: '/'
+          })
+          */
+      }
+      ]
+    );
+    
+  </script>
+</body>
+</html>
